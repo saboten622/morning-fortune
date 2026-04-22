@@ -12,7 +12,7 @@ st.set_page_config(
 )
 
 # =========================
-# カスタムCSS（背景・カードUI・オレンジ文字）
+# カスタムCSS（背景・カードUI）
 # =========================
 BACKGROUND_CSS = """
 <style>
@@ -40,10 +40,15 @@ h2 {
     text-shadow: 1px 1px 2px #ffffff;
 }
 
-/* 5カテゴリーの見出し（h3）もオレンジ */
+/* 5カテゴリーの見出し（h3）だけオレンジ */
 h3 {
     color: #FF8F00 !important;
     font-weight: 700 !important;
+}
+
+/* 本文は黒色に戻す */
+p, span, div, li {
+    color: #222 !important;
 }
 
 /* カード */
@@ -82,7 +87,7 @@ h3 {
     padding: 10px 14px;
     border: 1px dashed rgba(180, 180, 180, 0.8);
     font-size: 0.8rem;
-    color: #666;
+    color: #222 !important;
 }
 </style>
 """
@@ -242,6 +247,6 @@ if not st.session_state.paid_adfree:
 # フッター
 # =========================
 st.markdown(
-    "<p style='text-align:center;font-size:0.75rem;color:#888;margin-top:1.5rem;'>今日も、ゆるく・優しく・自分のペースでいこう。</p>",
+    "<p style='text-align:center;font-size:0.75rem;margin-top:1.5rem;'>今日も、ゆるく・優しく・自分のペースでいこう。</p>",
     unsafe_allow_html=True,
 )
