@@ -12,7 +12,7 @@ st.set_page_config(
 )
 
 # =========================
-# カスタムCSS（背景・カードUI）
+# カスタムCSS（背景・カードUI・オレンジ文字）
 # =========================
 BACKGROUND_CSS = """
 <style>
@@ -26,6 +26,18 @@ BACKGROUND_CSS = """
 .block-container {
     padding-top: 2rem;
     padding-bottom: 2rem;
+}
+
+/* タイトル（オレンジ） */
+h2 {
+    color: #FF8F00 !important;
+    text-shadow: 1px 1px 3px #ffffff;
+}
+
+/* サブタイトル（オレンジ） */
+.subtitle-orange {
+    color: #FF8F00 !important;
+    text-shadow: 1px 1px 2px #ffffff;
 }
 
 /* カード */
@@ -136,13 +148,13 @@ if "paid_adfree" not in st.session_state:
     st.session_state.paid_adfree = False
 
 # =========================
-# ヘッダー
+# ヘッダー（オレンジ）
 # =========================
 st.markdown(
     """
 <div class="card">
   <h2 style="text-align:center;">🌅 朝のポジスピ占い</h2>
-  <p style="text-align:center;color:#555;">一日のはじまりに、ちょっとだけ波動を整えるアプリ。</p>
+  <p class="subtitle-orange" style="text-align:center;">一日のはじまりに、ちょっとだけ波動を整えるアプリ。</p>
 </div>
 """,
     unsafe_allow_html=True,
@@ -152,6 +164,7 @@ st.markdown(
 # 5カテゴリー（無料）
 # =========================
 st.markdown('<div class="card">', unsafe_allow_html=True)
+
 st.markdown("### 🔮 今日のポジティブ運勢")
 st.write(positive_list[get_daily_index("positive", len(positive_list))])
 
@@ -179,7 +192,7 @@ if st.session_state.paid_super:
     st.success("決済済み：今日の超スペシャル運勢はこちら👇")
     st.write("今日のあなたの波動は、いつもより一段ふわっと高いところにあります。")
 else:
-    if st.button("Stripeで購入する（¥500）"):
+    if st.button("Stripeで購入する（¥500）", key="btn_super"):
         st.markdown(f"[👉 決済ページを開く]({STRIPE_LINK_SUPER_SPECIAL})", unsafe_allow_html=True)
 
 st.markdown("</div>", unsafe_allow_html=True)
@@ -194,7 +207,7 @@ if st.session_state.paid_money:
     st.success("決済済み：今日の金運スペシャルはこちら👇")
     st.write("今日は『お金の出口』を整える日。サブスクを一つ見直すと吉。")
 else:
-    if st.button("Stripeで購入する（¥300）"):
+    if st.button("Stripeで購入する（¥300）", key="btn_money"):
         st.markdown(f"[👉 決済ページを開く]({STRIPE_LINK_MONEY_SPECIAL})", unsafe_allow_html=True)
 
 st.markdown("</div>", unsafe_allow_html=True)
@@ -208,7 +221,7 @@ st.markdown("### 🚫 広告OFF（有料）")
 if st.session_state.paid_adfree:
     st.success("広告OFFが有効です。")
 else:
-    if st.button("Stripeで購入する（¥300）"):
+    if st.button("Stripeで購入する（¥300）", key="btn_adfree"):
         st.markdown(f"[👉 決済ページを開く]({STRIPE_LINK_AD_FREE})", unsafe_allow_html=True)
 
 st.markdown("</div>", unsafe_allow_html=True)
@@ -226,5 +239,4 @@ st.markdown(
     "<p style='text-align:center;font-size:0.75rem;color:#888;margin-top:1.5rem;'>今日も、ゆるく・優しく・自分のペースでいこう。</p>",
     unsafe_allow_html=True,
 )
-
 
