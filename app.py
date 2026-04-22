@@ -40,6 +40,12 @@ h2 {
     text-shadow: 1px 1px 2px #ffffff;
 }
 
+/* 5カテゴリーの見出し（h3）もオレンジ */
+h3 {
+    color: #FF8F00 !important;
+    font-weight: 700 !important;
+}
+
 /* カード */
 .card {
     background: rgba(255, 255, 255, 0.82);
@@ -239,4 +245,3 @@ st.markdown(
     "<p style='text-align:center;font-size:0.75rem;color:#888;margin-top:1.5rem;'>今日も、ゆるく・優しく・自分のペースでいこう。</p>",
     unsafe_allow_html=True,
 )
-
