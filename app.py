@@ -46,9 +46,15 @@ h3 {
     font-weight: 700 !important;
 }
 
-/* 本文は黒色に戻す */
-p, span, div, li {
+/* 本文だけ黒にする（最重要） */
+.category-text {
     color: #222 !important;
+    font-size: 1rem;
+}
+
+/* 有料説明や広告説明はオレンジ */
+.orange-text {
+    color: #FF8F00 !important;
 }
 
 /* カード */
@@ -87,7 +93,7 @@ p, span, div, li {
     padding: 10px 14px;
     border: 1px dashed rgba(180, 180, 180, 0.8);
     font-size: 0.8rem;
-    color: #222 !important;
+    color: #FF8F00 !important;
 }
 </style>
 """
@@ -177,19 +183,19 @@ st.markdown(
 st.markdown('<div class="card">', unsafe_allow_html=True)
 
 st.markdown("### 🔮 今日のポジティブ運勢")
-st.write(positive_list[get_daily_index("positive", len(positive_list))])
+st.markdown(f"<p class='category-text'>{positive_list[get_daily_index('positive', len(positive_list))]}</p>", unsafe_allow_html=True)
 
 st.markdown("### ✨ 今日のスピリチュアルメッセージ")
-st.write(spiritual_list[get_daily_index("spiritual", len(spiritual_list))])
+st.markdown(f"<p class='category-text'>{spiritual_list[get_daily_index('spiritual', len(spiritual_list))]}</p>", unsafe_allow_html=True)
 
 st.markdown("### 🚶 今日のラッキーアクション")
-st.write(lucky_action_list[get_daily_index("action", len(lucky_action_list))])
+st.markdown(f"<p class='category-text'>{lucky_action_list[get_daily_index('action', len(lucky_action_list))]}</p>", unsafe_allow_html=True)
 
 st.markdown("### 😂 今日の笑える一言（意味不明系）")
-st.write(funny_list[get_daily_index("funny", len(funny_list))])
+st.markdown(f"<p class='category-text'>{funny_list[get_daily_index('funny', len(funny_list))]}</p>", unsafe_allow_html=True)
 
 st.markdown("### 🎁 今日のラッキーアイテム")
-st.write(lucky_item_list[get_daily_index("item", len(lucky_item_list))])
+st.markdown(f"<p class='category-text'>{lucky_item_list[get_daily_index('item', len(lucky_item_list))]}</p>", unsafe_allow_html=True)
 
 st.markdown("</div>", unsafe_allow_html=True)
 
@@ -197,12 +203,13 @@ st.markdown("</div>", unsafe_allow_html=True)
 # 有料：超スペシャル運勢
 # =========================
 st.markdown('<div class="premium-card">', unsafe_allow_html=True)
-st.markdown("### ✨ 超スペシャル運勢（有料）")
+st.markdown("<h3>✨ 超スペシャル運勢（有料）</h3>", unsafe_allow_html=True)
 
 if st.session_state.paid_super:
     st.success("決済済み：今日の超スペシャル運勢はこちら👇")
-    st.write("今日のあなたの波動は、いつもより一段ふわっと高いところにあります。")
+    st.markdown("<p class='category-text'>今日のあなたの波動は、いつもより一段ふわっと高いところにあります。</p>", unsafe_allow_html=True)
 else:
+    st.markdown("<p class='orange-text'>購入すると、今日だけの特別なメッセージが解放されます。</p>", unsafe_allow_html=True)
     if st.button("Stripeで購入する（¥500）", key="btn_super"):
         st.markdown(f"[👉 決済ページを開く]({STRIPE_LINK_SUPER_SPECIAL})", unsafe_allow_html=True)
 
@@ -212,12 +219,13 @@ st.markdown("</div>", unsafe_allow_html=True)
 # 有料：金運スペシャル
 # =========================
 st.markdown('<div class="money-card">', unsafe_allow_html=True)
-st.markdown("### 💰 金運スペシャル（有料）")
+st.markdown("<h3>💰 金運スペシャル（有料）</h3>", unsafe_allow_html=True)
 
 if st.session_state.paid_money:
     st.success("決済済み：今日の金運スペシャルはこちら👇")
-    st.write("今日は『お金の出口』を整える日。サブスクを一つ見直すと吉。")
+    st.markdown("<p class='category-text'>今日は『お金の出口』を整える日。サブスクを一つ見直すと吉。</p>", unsafe_allow_html=True)
 else:
+    st.markdown("<p class='orange-text'>購入すると、今日の金運に特化したメッセージが解放されます。</p>", unsafe_allow_html=True)
     if st.button("Stripeで購入する（¥300）", key="btn_money"):
         st.markdown(f"[👉 決済ページを開く]({STRIPE_LINK_MONEY_SPECIAL})", unsafe_allow_html=True)
 
@@ -227,11 +235,12 @@ st.markdown("</div>", unsafe_allow_html=True)
 # 広告OFF
 # =========================
 st.markdown('<div class="card">', unsafe_allow_html=True)
-st.markdown("### 🚫 広告OFF（有料）")
+st.markdown("<h3>🚫 広告OFF（有料）</h3>", unsafe_allow_html=True)
 
 if st.session_state.paid_adfree:
     st.success("広告OFFが有効です。")
 else:
+    st.markdown("<p class='orange-text'>購入すると、下部の広告エリアが非表示になります。</p>", unsafe_allow_html=True)
     if st.button("Stripeで購入する（¥300）", key="btn_adfree"):
         st.markdown(f"[👉 決済ページを開く]({STRIPE_LINK_AD_FREE})", unsafe_allow_html=True)
 
@@ -247,6 +256,6 @@ if not st.session_state.paid_adfree:
 # フッター
 # =========================
 st.markdown(
-    "<p style='text-align:center;font-size:0.75rem;margin-top:1.5rem;'>今日も、ゆるく・優しく・自分のペースでいこう。</p>",
+    "<p style='text-align:center;font-size:0.75rem;margin-top:1.5rem;color:#FF8F00;'>今日も、ゆるく・優しく・自分のペースでいこう。</p>",
     unsafe_allow_html=True,
 )
