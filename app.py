@@ -255,4 +255,49 @@ if st.session_state.paid_super:
     st.markdown(f"<p class='category-text'>{super_special_list[get_daily_index('super', len(super_special_list))]}</p>", unsafe_allow_html=True)
 else:
     st.markdown("<p class='orange-text'>購入すると、今日だけの特別なメッセージが解放されます。</p>", unsafe_allow_html=True)
-    st.mark
+    st.markdown(f"<a href='{STRIPE_LINK_SUPER_SPECIAL}' target='_blank' class='orange-text'>👉 Stripeで購入する（¥500）</a>", unsafe_allow_html=True)
+
+st.markdown("</div>", unsafe_allow_html=True)
+
+# =========================
+# 有料：金運スペシャル（20パターン）
+# =========================
+st.markdown("<h3>💰 金運スペシャル（有料）</h3>", unsafe_allow_html=True)
+st.markdown('<div class="money-card">', unsafe_allow_html=True)
+
+if st.session_state.paid_money:
+    st.success("決済済み：今日の金運スペシャルはこちら👇")
+    st.markdown(f"<p class='category-text'>{money_special_list[get_daily_index('money', len(money_special_list))]}</p>", unsafe_allow_html=True)
+else:
+    st.markdown("<p class='orange-text'>購入すると、今日の金運に特化したメッセージが解放されます。</p>", unsafe_allow_html=True)
+    st.markdown(f"<a href='{STRIPE_LINK_MONEY_SPECIAL}' target='_blank' class='orange-text'>👉 Stripeで購入する（¥300）</a>", unsafe_allow_html=True)
+
+st.markdown("</div>", unsafe_allow_html=True)
+
+# =========================
+# 広告OFF
+# =========================
+st.markdown("<h3>🚫 広告OFF（有料）</h3>", unsafe_allow_html=True)
+st.markdown('<div class="card">', unsafe_allow_html=True)
+
+if st.session_state.paid_adfree:
+    st.success("広告OFFが有効です。")
+else:
+    st.markdown("<p class='orange-text'>購入すると、下部の広告エリアが非表示になります。</p>", unsafe_allow_html=True)
+    st.markdown(f"<a href='{STRIPE_LINK_AD_FREE}' target='_blank' class='orange-text'>👉 Stripeで購入する（¥300）</a>", unsafe_allow_html=True)
+
+st.markdown("</div>", unsafe_allow_html=True)
+
+# =========================
+# 広告エリア
+# =========================
+if not st.session_state.paid_adfree:
+    st.markdown('<div class="ad-card">🔔 ここに広告が入ります（広告OFFで非表示）</div>', unsafe_allow_html=True)
+
+# =========================
+# フッター
+# =========================
+st.markdown(
+    "<p style='text-align:center;font-size:0.75rem;margin-top:1.5rem;color:#FF8F00;'>今日も、ゆるく・優しく・自分のペースでいこう。</p>",
+    unsafe_allow_html=True,
+)
