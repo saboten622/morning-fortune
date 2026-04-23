@@ -24,7 +24,7 @@ BACKGROUND_CSS = """
     background: rgba(0,0,0,0);
 }
 .block-container {
-    padding-top: 2rem;
+    padding-top: 1.2rem;
     padding-bottom: 2rem;
 }
 
@@ -109,7 +109,7 @@ def get_daily_index(category: str, max_len: int = 20) -> int:
     return int(h, 16) % max_len
 
 # =========================
-# 5カテゴリー（無料）
+# 無料5カテゴリー
 # =========================
 
 positive_list = [
@@ -217,17 +217,10 @@ if "paid_adfree" not in st.session_state:
     st.session_state.paid_adfree = False
 
 # =========================
-# ヘッダー
+# タイトル（カードなし）
 # =========================
-st.markdown(
-    """
-<div class="card">
-  <h2 style="text-align:center;">🌅 朝のポジスピ占い</h2>
-  <p class="subtitle-orange" style="text-align:center;">一日のはじまりに、ちょっとだけ波動を整えるアプリ。</p>
-</div>
-""",
-    unsafe_allow_html=True,
-)
+st.markdown("<h2 style='text-align:center;'>🌅 朝のポジスピ占い</h2>", unsafe_allow_html=True)
+st.markdown("<p class='subtitle-orange' style='text-align:center;'>一日のはじまりに、ちょっとだけ波動を整えるアプリ。</p>", unsafe_allow_html=True)
 
 # =========================
 # 無料5カテゴリー
@@ -254,60 +247,12 @@ st.markdown("</div>", unsafe_allow_html=True)
 # =========================
 # 有料：超スペシャル運勢（20パターン）
 # =========================
-st.markdown('<div class="premium-card">', unsafe_allow_html=True)
 st.markdown("<h3>✨ 超スペシャル運勢（有料）</h3>", unsafe_allow_html=True)
+st.markdown('<div class="premium-card">', unsafe_allow_html=True)
 
 if st.session_state.paid_super:
     st.success("決済済み：今日の超スペシャル運勢はこちら👇")
     st.markdown(f"<p class='category-text'>{super_special_list[get_daily_index('super', len(super_special_list))]}</p>", unsafe_allow_html=True)
 else:
     st.markdown("<p class='orange-text'>購入すると、今日だけの特別なメッセージが解放されます。</p>", unsafe_allow_html=True)
-    if st.button("Stripeで購入する（¥500）", key="btn_super"):
-        st.markdown(f"[👉 決済ページを開く]({STRIPE_LINK_SUPER_SPECIAL})", unsafe_allow_html=True)
-
-st.markdown("</div>", unsafe_allow_html=True)
-
-# =========================
-# 有料：金運スペシャル（20パターン）
-# =========================
-st.markdown('<div class="money-card">', unsafe_allow_html=True)
-st.markdown("<h3>💰 金運スペシャル（有料）</h3>", unsafe_allow_html=True)
-
-if st.session_state.paid_money:
-    st.success("決済済み：今日の金運スペシャルはこちら👇")
-    st.markdown(f"<p class='category-text'>{money_special_list[get_daily_index('money', len(money_special_list))]}</p>", unsafe_allow_html=True)
-else:
-    st.markdown("<p class='orange-text'>購入すると、今日の金運に特化したメッセージが解放されます。</p>", unsafe_allow_html=True)
-    if st.button("Stripeで購入する（¥300）", key="btn_money"):
-        st.markdown(f"[👉 決済ページを開く]({STRIPE_LINK_MONEY_SPECIAL})", unsafe_allow_html=True)
-
-st.markdown("</div>", unsafe_allow_html=True)
-
-# =========================
-# 広告OFF
-# =========================
-st.markdown('<div class="card">', unsafe_allow_html=True)
-st.markdown("<h3>🚫 広告OFF（有料）</h3>", unsafe_allow_html=True)
-
-if st.session_state.paid_adfree:
-    st.success("広告OFFが有効です。")
-else:
-    st.markdown("<p class='orange-text'>購入すると、下部の広告エリアが非表示になります。</p>", unsafe_allow_html=True)
-    if st.button("Stripeで購入する（¥300）", key="btn_adfree"):
-        st.markdown(f"[👉 決済ページを開く]({STRIPE_LINK_AD_FREE})", unsafe_allow_html=True)
-
-st.markdown("</div>", unsafe_allow_html=True)
-
-# =========================
-# 広告エリア
-# =========================
-if not st.session_state.paid_adfree:
-    st.markdown('<div class="ad-card">🔔 ここに広告が入ります（広告OFFで非表示）</div>', unsafe_allow_html=True)
-
-# =========================
-# フッター
-# =========================
-st.markdown(
-    "<p style='text-align:center;font-size:0.75rem;margin-top:1.5rem;color:#FF8F00;'>今日も、ゆるく・優しく・自分のペースでいこう。</p>",
-    unsafe_allow_html=True,
-)
+    st.mark
