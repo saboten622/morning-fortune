@@ -109,7 +109,7 @@ def get_daily_index(category: str, max_len: int = 20) -> int:
     return int(h, 16) % max_len
 
 # =========================
-# 5カテゴリーのテンプレ
+# 5カテゴリー（無料）
 # =========================
 
 positive_list = [
@@ -148,7 +148,59 @@ lucky_item_list = [
 ]
 
 # =========================
-# Stripe 決済リンク
+# 課金20パターン：超スペシャル
+# =========================
+super_special_list = [
+    "今日は『宇宙の追い風』があなたに集中する日。小さな選択が大きな流れを作る。",
+    "未来のあなたがそっと背中を押す日。最初の直感を信じて。",
+    "運命のスイッチが静かに入る日。5分の行動が未来を変える。",
+    "見えない味方が増える日。感謝をひとつ言葉にすると運が倍増。",
+    "閉じていた扉がひとつ開く日。新しい選択肢を受け入れて。",
+    "流れの調律が起きる日。自然とやるべきことが見えてくる。",
+    "内側のエネルギーが満ちる日。丁寧な行動が運を整える。",
+    "直感のアンテナが最強の日。気になったらすぐ動くと吉。",
+    "縁の種が芽を出す日。軽い挨拶が幸運のきっかけに。",
+    "小さな奇跡が起きる日。心を少し開くと良い流れが入る。",
+    "今日は“波動の透明度”が上がる日。余計な力を抜くほど運が整う。",
+    "あなたの中の静かな情熱が灯る日。小さな挑戦が吉。",
+    "心の奥の願いが浮かび上がる日。無視しないであげて。",
+    "今日は“切り替えの風”が吹く日。古い習慣を一つ手放してみて。",
+    "あなたの魅力が自然と伝わる日。笑顔が運を引き寄せる。",
+    "今日は“軽やかさ”がテーマ。重い選択は避けてOK。",
+    "心のノイズが減る日。静かな時間が運を整える。",
+    "あなたの言葉が誰かの救いになる日。優しい一言が吉。",
+    "今日は“流れに乗る日”。逆らわず、委ねるとスムーズ。",
+    "あなたの未来が少しだけ近づく日。ひらめきを大切に。",
+]
+
+# =========================
+# 課金20パターン：金運スペシャル
+# =========================
+money_special_list = [
+    "今日は『お金の出口』を整える日。サブスクを一つ見直すと吉。",
+    "小さな節約が金運を呼ぶ日。迷った買い物は一度保留に。",
+    "受け取り力が高まる日。褒め言葉を素直に受け取って。",
+    "お金の流れが整う日。財布のレシートを1枚捨てよう。",
+    "チャンスの種が芽を出す日。5分の調べ物が金運を動かす。",
+    "あなたの価値が上がる日。得意を一つシェアすると吉。",
+    "無駄の霧が晴れる日。部屋のどこかを1分だけ片付けて。",
+    "金運の縁が強まる日。誰かの一言がヒントに。",
+    "引き寄せ力が高まる日。やりたいことをメモに書こう。",
+    "金運の切り替えポイントの日。朝の5分が未来の財運を作る。",
+    "今日は“お金の気配”が近づく日。小さな行動が吉。",
+    "財布の中の色が整う日。不要なカードを1枚抜いてみて。",
+    "今日は“循環”がテーマ。誰かに小さな親切をすると金運UP。",
+    "数字の流れが良い日。気になる数字をメモしておくと吉。",
+    "今日は“受け皿”が広がる日。部屋のスペースを少し空けて。",
+    "お金の不安が薄れる日。深呼吸してリセットしよう。",
+    "今日は“情報運”が強い日。1つだけ調べ物をすると吉。",
+    "あなたの魅力が金運を引き寄せる日。姿勢を整えて歩こう。",
+    "今日は“選択の精度”が上がる日。迷ったら安い方でOK。",
+    "未来の収入につながるヒントが落ちている日。アンテナを立てて。",
+]
+
+# =========================
+# Stripe 決済リンク（あなたのまま）
 # =========================
 STRIPE_LINK_SUPER_SPECIAL = "https://buy.stripe.com/test_00w3cu6QD6FX2lI9IjdZ600"
 STRIPE_LINK_MONEY_SPECIAL = "https://buy.stripe.com/test_6oU9AS7UH1lD3pM2fRdZ601"
@@ -165,7 +217,7 @@ if "paid_adfree" not in st.session_state:
     st.session_state.paid_adfree = False
 
 # =========================
-# ヘッダー（オレンジ）
+# ヘッダー
 # =========================
 st.markdown(
     """
@@ -178,7 +230,7 @@ st.markdown(
 )
 
 # =========================
-# 5カテゴリー（無料）
+# 無料5カテゴリー
 # =========================
 st.markdown('<div class="card">', unsafe_allow_html=True)
 
@@ -200,14 +252,14 @@ st.markdown(f"<p class='category-text'>{lucky_item_list[get_daily_index('item', 
 st.markdown("</div>", unsafe_allow_html=True)
 
 # =========================
-# 有料：超スペシャル運勢
+# 有料：超スペシャル運勢（20パターン）
 # =========================
 st.markdown('<div class="premium-card">', unsafe_allow_html=True)
 st.markdown("<h3>✨ 超スペシャル運勢（有料）</h3>", unsafe_allow_html=True)
 
 if st.session_state.paid_super:
     st.success("決済済み：今日の超スペシャル運勢はこちら👇")
-    st.markdown("<p class='category-text'>今日のあなたの波動は、いつもより一段ふわっと高いところにあります。</p>", unsafe_allow_html=True)
+    st.markdown(f"<p class='category-text'>{super_special_list[get_daily_index('super', len(super_special_list))]}</p>", unsafe_allow_html=True)
 else:
     st.markdown("<p class='orange-text'>購入すると、今日だけの特別なメッセージが解放されます。</p>", unsafe_allow_html=True)
     if st.button("Stripeで購入する（¥500）", key="btn_super"):
@@ -216,14 +268,14 @@ else:
 st.markdown("</div>", unsafe_allow_html=True)
 
 # =========================
-# 有料：金運スペシャル
+# 有料：金運スペシャル（20パターン）
 # =========================
 st.markdown('<div class="money-card">', unsafe_allow_html=True)
 st.markdown("<h3>💰 金運スペシャル（有料）</h3>", unsafe_allow_html=True)
 
 if st.session_state.paid_money:
     st.success("決済済み：今日の金運スペシャルはこちら👇")
-    st.markdown("<p class='category-text'>今日は『お金の出口』を整える日。サブスクを一つ見直すと吉。</p>", unsafe_allow_html=True)
+    st.markdown(f"<p class='category-text'>{money_special_list[get_daily_index('money', len(money_special_list))]}</p>", unsafe_allow_html=True)
 else:
     st.markdown("<p class='orange-text'>購入すると、今日の金運に特化したメッセージが解放されます。</p>", unsafe_allow_html=True)
     if st.button("Stripeで購入する（¥300）", key="btn_money"):
